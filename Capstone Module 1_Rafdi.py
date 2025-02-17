@@ -38,8 +38,8 @@ users = {
     'admin': 'admin',
     'user1': 'password123'
 }
-daftarpeminjam = {}
-dendaperhari = 10000
+DaftarPeminjam = {}
+DendaPerHari = 10000
 
 def login():
     while True:
@@ -287,7 +287,7 @@ def PinjamBuku():
                             "!!!!!! Input yang Anda Masukkan Salah, Silahkan Input Kembali Tanggal Pinjam Dengan Format 'dd-mm-yyyy' !!!!!!")
                         continue
                     break
-                daftarpeminjam[Nomor] = {
+                DaftarPeminjam[Nomor] = {
                     'Nama': Nama,
                     'Umur': Umur,
                     'Instansi': Instansi,
@@ -323,19 +323,19 @@ def KembalikanBuku():
     MenuParsial = input(' Pilihlah Sub Menu [1-2]: ')
     if MenuParsial == '1':
         NomorSebagaiInput()
-        if Nomor in daftarpeminjam:
-            tglPinjamstr = daftarpeminjam[Nomor]['Tanggal Pinjam']
+        if Nomor in DaftarPeminjam:
+            tglPinjamstr = DaftarPeminjam[Nomor]['Tanggal Pinjam']
             tglPinjam = datetime.datetime.strptime(tglPinjamstr, "%d-%m-%Y").date()
             tglKembali = datetime.date.today()
             SelisihHari = (tglKembali - tglPinjam).days
             keterlambatan = max(0, SelisihHari - 14)
             if keterlambatan > 0:
-                denda = keterlambatan * dendaperhari
+                denda = keterlambatan * DendaPerHari
                 print(f"Anda terlambat mengembalikan buku selama {keterlambatan} hari.")
                 print(f"Denda yang harus dibayar: Rp {denda:,.2f}")
             else:
                 print("Buku dikembalikan tepat waktu. Tidak ada denda.")
-            del daftarpeminjam[Nomor]
+            del DaftarPeminjam[Nomor]
             print("Buku berhasil dikembalikan.")
         else:
             print("Buku ini tidak terdaftar sebagai buku yang dipinjam.")
